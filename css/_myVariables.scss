@@ -1,12 +1,15 @@
 /* Colores */
 $colorTitle:      #303030;
 $colorPrincipal:  #f41806;
+$colorBody:       #535353;
 $lightPrincipal:  lighten($colorPrincipal, 39%);
 $mediumPrincipal: lighten($colorPrincipal, 18%);
 $grey:            #f9f9f9;
 
 /* Custom Boostrap */
 $link-color: $colorPrincipal;
+$carousel-caption-color: $colorBody;
+$carousel-text-shadow: none;
 
 $list-group-border-radius:  0px;
 $border-radius-base:        0px;

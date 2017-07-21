@@ -52,4 +52,14 @@ block content
 
   //Diferencias
   div
-    
+    h3 Diferencias entre autómatas deterministas vs no deterministas
+    +myCarousel('myCarousel',[
+      {p: "Un autómata es determinista cuando el paso de un estado" +
+        "interno al siguiente siempre está unívocamente determinado" +
+        "por el estado actual, la entrada y la información almacenada" +
+        "en el dispositivo de almacenamiento."},
+      {p: "Un autómata es no determinista en caso contrario. Cuando" +
+        "para un mismo estado interno, misma entrada y misma información" +
+        "en el dispositivo de almacenamiento puedan existir varios estados" +
+        "siguientes posibles."}
+    ])
