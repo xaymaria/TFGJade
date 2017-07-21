@@ -1,0 +1,17 @@
+/* Colores */
+$colorTitle:      #303030;
+$colorPrincipal:  #f41806;
+$lightPrincipal:  lighten($colorPrincipal, 39%);
+$mediumPrincipal: lighten($colorPrincipal, 18%);
+$grey:            #f9f9f9;
+
+/* Custom Boostrap */
+$link-color: $colorPrincipal;
+
+$list-group-border-radius:  0px;
+$border-radius-base:        0px;
+$border-radius-large:       0px;
+$border-radius-small:       0px;
+$btn-border-radius-base:    0px;
+$btn-border-radius-large:   0px;
+$btn-border-radius-small:   0px;

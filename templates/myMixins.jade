@@ -1,0 +1,16 @@
+- var i = 0;
+
+mixin component-item
+  li.list-group-item
+    block
+
+mixin component(logo, title)
+  div
+    a(href='#demo#{i}', data-toggle='collapse')
+      span(class='logoSmall glyphicon glyphicon-'+logo)
+      h4= title
+    div(id='demo#{i}', class='collapse')
+      - i += 1;
+      +list-group-custom
+        block
+

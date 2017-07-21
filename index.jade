@@ -1,0 +1,55 @@
+extends _bootstrap
+
+block content
+  .first
+    h2 ¿Qué es un autómata?
+    p.pColor
+      | Un autómata es un dispositivo abstracto capaz de producir una
+      | información (salida) a partir de una información de partida (entrada).
+
+  .components
+    h3 Se compone de:
+    br
+    div
+      +component('play-circle', "UN DISPOSITIVO DE ENTRADA")
+        +component-item.
+          que contiene una secuencia de símbolos de cierto alfabeto que el autómata puede leer.
+      +component('off', "UN DISPOSITIVO DE SALIDA")
+        +component-item.
+          sobre el que el autómata puede escribir.
+      +component('floppy-disk', "UN DISPOSITIVO DE ALMACENAMIENTO AUXILIAR (Opcional)")
+        +component-item
+          | sobre que el autómata puede tanto leer como escribir.
+          br
+          | Por ejemplo:
+          = ' '
+          +a-btn('#','sm myBtn') Máquinas de Turing
+      +component('cog', 'UNA UNIDAD DE CONTROL')
+        p tal que:
+        +component-item.
+          En cada momento se encuentra en un cierto <em>estado interno.</em>
+        +component-item
+          | Tiene una función de transición que le permite cambiar de estado
+          | dependiendo del estado actual, del símbolo leído de la entrada y de la
+          | información guardada en el dispositivo de almacenamiento.
+        +component-item
+          | En cada cambio de estado puede producir una salida o modificar el
+          | dispositivo de almacenamiento.
+
+  //Tipos de autómatas
+  div
+    h3 Sus clases son los...
+    .row
+      .col-md-6
+        h4 AUTÓMATAS TRANSDUCTORES
+        p.pColor.
+          Son los más generales, capaces de producir palabras como salida.
+      .col-md-6
+        h4 AUTÓMATAS RECONOCEDORES
+        p.pColor.
+          Son aquellos cuya salida es un valor booleano (cierto/falso)
+          que indica si se acepta o no la entrada recibida.
+
+  //Diferencias
+  div
+    
