@@ -42,7 +42,7 @@ include components/images
 //- Including Bootswatch theme mixins
 include components/bootswatch
 
-//My mixins
+//- My mixins
 include templates/myMixins
 
 doctype html
@@ -63,13 +63,15 @@ html(lang="es")
 			script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js")
 			script(src="js/main.js")
 
-	body(data-spy="scroll",data-target=".scrollspy")
-		block body#myPage
+	body(data-spy="scroll",data-target=".scrollspy")#myPage
+		block body
 			block navbar
 				include templates/_navbar
 			block jumbotron
 				#titulo.jumbotron.text-center
 					h1 Autómatas y máquinas de Turing
 			block content
+			block footer
+				include templates/_footer
 
 

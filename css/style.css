@@ -7991,3 +7991,27 @@ ul, ol {
   margin-left: 150px;
   margin-right: 150px;
 }
+
+/* Footer */
+footer {
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding: 30px 50px;
+}
+
+footer:before, footer:after {
+  content: " ";
+  display: table;
+}
+
+footer:after {
+  clear: both;
+}
+
+footer span {
+  font-size: 20px;
+  margin-bottom: 20px;
+  color: #f41806;
+}

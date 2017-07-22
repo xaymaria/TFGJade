@@ -199,3 +199,14 @@ ul, ol{
     margin-right: 150px;
   }
 }
+
+/* Footer */
+footer{
+  @include container-fixed();
+  padding: 30px 50px;
+  span{
+    font-size: 20px;
+    margin-bottom: 20px;
+    color: $colorPrincipal;
+  }
+}
