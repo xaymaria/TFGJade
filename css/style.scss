@@ -30,7 +30,11 @@ em{
   color: darken($colorPrincipal, 7%);
 }
 
-h4 {
+h3{
+  color: $colorTitle;
+}
+
+h4{
   color: $colorTitle !important;
   font-size: 19px !important;
   line-height: 1.375em;

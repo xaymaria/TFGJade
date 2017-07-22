@@ -35,9 +35,9 @@ mixin myCarousel(id,items)
             +carousel-caption(item)
 
     //-  Controls
-    a.left.carousel-control(href="#carousel-#{id}", role="button", data-slide="prev")
+    a.left.carousel-control(href="#"+id, role="button", data-slide="prev")
       +icon("chevron-left")
       span.sr-only Previous
-    a.right.carousel-control(href="#carousel-#{id}", role="button", data-slide="next")
+    a.right.carousel-control(href="#"+id, role="button", data-slide="next")
       +icon("chevron-right")
       span.sr-only Next
