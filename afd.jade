@@ -1,0 +1,92 @@
+extends _bootstrap
+
+block content
+  .first.esquema
+    h2 ¿Qué es un Autómata Finito Determinista?
+    p: big Un Autómata Finito Determinista (AFD) es una quíntupla
+    h3 (
+      +tooltip-left('Q, ', 'Conjunto finito no vacío de elementos denominado estados internos o conjunto de estados')
+      +tooltip-top('&Sigma;, ', "Alfabeto de entrada")
+      +tooltip-top('&fnof;, ', "Función de transición")
+      +tooltip-top('q<sub>0</sub>, ', "Estado inicial")
+      +tooltip-right('F', "Subconjunto de Q denominado estados finales o de aceptación")
+      | )
+    br
+    +accordion('1')
+      +accordion-item('info', 'Observaciones','1', true)
+        +list-group-custom
+          +component-item.
+            Los estados internos pueden tener nombres cualesquiera.
+          +component-item
+            | El alfabeto &Sigma; es el alfabeto al que pertenece la secuencia
+            | de símbolos (palabra) de la cinta de entrada.
+          +component-item
+            | La función de transición &fnof;: Q &times; &Sigma; &rarr; Q es una aplicación que asocia a
+            | todo par <i>(q, a)</i> de Q x &Sigma; <i>uno y sólo</i> un elemento de Q.
+          +component-item.
+            Todo AFD tiene que tener un estado inicial y sólo uno.
+          +component-item
+            | Puede tener cualquier cantidad de estados finales, desde ninguno hasta todos los posibles.
+            | También puede darse el caso que el estado inicial sea a la vez, el estado final.
+
+
+  //Caracteristicas
+  div
+    h3 Características principales de un AFD
+    .table-afd
+      +table-striped(
+        [],
+        [
+          ['<span class="glyphicon glyphicon-floppy-remove logo"></span> ' +
+          '<em>No tiene dispositivo de almacenamiento</em> auxiliar (de ahí el calificativo de finito).'],
+          ['El dispositivo de entrada es una cinta formada por casillas (conteniendo cada una un símbolo)' +
+            'sobre las que se mueve, <em>de una en una y de izquierda a derecha</em>, un cabezal de lectura. ' +
+            '<span class="glyphicon glyphicon-step-forward logo"></span>'],
+          ['<span class="glyphicon glyphicon-ok-circle logo"></span> ' +
+           '<span class="glyphicon glyphicon-remove-circle logo"></span>' +
+          'La salida producida es una <em>salida booleana</em> (sí / no).'],
+          ['Tiene un estado interno especial denominado <em>estado inicial</em>, y todo estado puede estar o no marcado como <em>estado final</em>. ' +
+          '<span class="glyphicon glyphicon-asterisk logo"></span>'],
+          ['<span class="glyphicon glyphicon-road logo"></span> ' +
+           'Tiene un <em> comportamiento determinista </em>: el paso de un estado interno al siguiente está unívocamente determinado por el estado actual'+
+           'y el símbolo leído en el dispositivo de entrada.']
+        ]
+      )
+
+  //Representacion
+  div
+    h3 Representación
+    p Existen dos formas, equivalentes, para representar un AFD:
+    .representacion
+      div
+        h4 TABLA DE TRANSICIONES
+        +list-group-custom
+          +component-item Filas encabezadas por los estados (q<sub>i</sub> &isin; conjunto de estados).
+          +component-item Columnas encabezas por los símbolos de entrada (e<sub>i</sub> &isin; alfabeto de entrada).
+          +component-item En la primera columna, el símbolo <span class="glyphicon glyphicon-arrow-right"></span> marca el estado inicial.
+          +component-item Las filas con asterisco <span class="glyphicon glyphicon-asterisk"></span>, corresponden a estados finales.
+      div
+        h4 GRAFO DE TRANSICIONES
+        +list-group-custom
+          +component-item Nodos etiquetados por los estados (q<sub>i</sub> &isin; conjunto de estados).
+          +component-item
+            | Arcos entre nodos q<sub>i</sub> a q<sub>j</sub> etiquetados como e<sub>i</sub>
+            | (símbolo de entrada) si existe la transición de q<sub>i</sub> a q<sub>j</sub> con e<sub>i</sub>.
+          +component-item El estado inicial se señala con una flecha <span class="glyphicon glyphicon-arrow-right"></span>
+          +component-item Y el estado final con
+            <span class="glyphicon glyphicon-asterisk"></span> o doble círculo
+            <span class="glyphicon glyphicon-record"></span>.
+    .ejemplosRep
+      +accordion('accordion')
+        +accordion-item-default('Ejemplo 1','accordion', false)
+          .col-md-12
+            p A<sub>1</sub> = ({q<sub>0</sub>, q<sub>1</sub>, q<sub>2</sub>}, {a, b}, f, q<sub>0</sub>, {q<sub>0</sub>, q<sub>1</sub>}), siendo f :
+              <br>f(q<sub>0</sub>, a) = q<sub>0</sub>, f (q<sub>0</sub>, b) = q<sub>1</sub>
+              <br>f(q<sub>1</sub>, a) = q<sub>2</sub>, f (q<sub>1</sub>, b) = q<sub>1</sub>
+              <br>f(q<sub>2</sub>, a) = q<sub>2</sub>, f (q<sub>2</sub>, b) = q<sub>2</sub>
+          .col-md-6
+            //+table-bordered(
+              [[],['A<sub>1'],['a'],['b']],
+              [[arrowRight+' '+asterisco]]
+              )
+          .col-md-6

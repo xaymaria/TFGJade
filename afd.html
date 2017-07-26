@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!--link(rel="icon",href="../../favicon.ico")-->
+    <title>Autómatas y máquinas de Turing</title>
+    <!--link(rel="stylesheet",href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css")-->
+    <link href="css/style.css" rel="stylesheet">
+  </head>
+  <body data-spy="scroll" data-target=".scrollspy" id="myPage">
+    <nav role="navigation" class="navbar navbar-fixed-top navbar-default">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" data-toggle="collapse" data-target="#myNavbar" aria-expanded="false" aria-controls="navbar" class="navbar-toggle collapsed"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a href="#" class="navbar-brand">URJC</a>
+        </div>
+        <div id="myNavbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="index.html">AUTÓMATAS</a></li>
+                <li><a href="afd.html" data-toggle="tooltip" data-placement="bottom" title="Autómatas Finitos Deterministas">AFD</a></li>
+                <li><a href="afnd.html" data-toggle="tooltip" data-placement="bottom" title="Autómatas Finitos No Deterministas">AFND</a></li>
+                <li><a href="aapilas.html" data-toggle="tooltip" data-placement="bottom" title="Autómatas a pilas">A. A PILAS</a></li>
+                <li><a href="turing.html" data-toggle="tooltip" data-placement="bottom" title="Máquinas de Turing">M. DE TURING</a></li>
+                <li><a href="mt_editor.html" data-toggle="tooltip" data-placement="bottom" title="Editor de Máquinas de Turing">MT EDITOR</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div id="titulo" class="jumbotron text-center">
+      <h1>Autómatas y máquinas de Turing</h1>
+    </div>
+    <div class="first esquema">
+      <h2>¿Qué es un Autómata Finito Determinista?</h2>
+      <p>
+        <big>Un Autómata Finito Determinista (AFD) es una quíntupla</big>
+      </p>
+      <h3>(<a href="#" data-toggle="tooltip" data-placement="left" title="Conjunto finito no vacío de elementos denominado estados internos o conjunto de estados">Q, </a><a href="#" data-toggle="tooltip" data-placement="top" title="Alfabeto de entrada">&Sigma;, </a><a href="#" data-toggle="tooltip" data-placement="top" title="Función de transición">&fnof;, </a><a href="#" data-toggle="tooltip" data-placement="top" title="Estado inicial">q<sub>0</sub>, </a><a href="#" data-toggle="tooltip" data-placement="right" title="Subconjunto de Q denominado estados finales o de aceptación">F</a>)
+      </h3><br>
+      <div id="accordion1" role="tablist" aria-multiselectable="true" class="panel-group">
+        <div class="panel panel-info">
+          <div role="tab" id="headingObservaciones" class="panel-heading">
+            <h5 class="panel-title"><a data-toggle="collapse" data-parent="#accordion1" href="#collapseObservaciones" aria-expanded="true" aria-controls="collapseOne">Observaciones</a></h5>
+          </div>
+          <div id="collapseObservaciones" role="tabpanel" aria-labelledby="headingObservaciones" class="panel-collapse collapse in">
+            <!--.panel-body-->
+            <ul class="list-group">
+              <li class="list-group-item">Los estados internos pueden tener nombres cualesquiera.
+              </li>
+              <li class="list-group-item">
+                El alfabeto &Sigma; es el alfabeto al que pertenece la secuencia
+                de símbolos (palabra) de la cinta de entrada.
+              </li>
+              <li class="list-group-item">
+                La función de transición &fnof;: Q &times; &Sigma; &rarr; Q es una aplicación que asocia a
+                todo par <i>(q, a)</i> de Q x &Sigma; <i>uno y sólo</i> un elemento de Q.
+              </li>
+              <li class="list-group-item">Todo AFD tiene que tener un estado inicial y sólo uno.
+              </li>
+              <li class="list-group-item">
+                Puede tener cualquier cantidad de estados finales, desde ninguno hasta todos los posibles.
+                También puede darse el caso que el estado inicial sea a la vez, el estado final.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--Caracteristicas-->
+    <div>
+      <h3>Características principales de un AFD</h3>
+      <div class="table-afd">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="glyphicon glyphicon-floppy-remove logo"></span> <em>No tiene dispositivo de almacenamiento</em> auxiliar (de ahí el calificativo de finito).
+              </td>
+            </tr>
+            <tr>
+              <td>El dispositivo de entrada es una cinta formada por casillas (conteniendo cada una un símbolo)sobre las que se mueve, <em>de una en una y de izquierda a derecha</em>, un cabezal de lectura. <span class="glyphicon glyphicon-step-forward logo"></span>
+              </td>
+            </tr>
+            <tr>
+              <td><span class="glyphicon glyphicon-ok-circle logo"></span> <span class="glyphicon glyphicon-remove-circle logo"></span>La salida producida es una <em>salida booleana</em> (sí / no).
+              </td>
+            </tr>
+            <tr>
+              <td>Tiene un estado interno especial denominado <em>estado inicial</em>, y todo estado puede estar o no marcado como <em>estado final</em>. <span class="glyphicon glyphicon-asterisk logo"></span>
+              </td>
+            </tr>
+            <tr>
+              <td><span class="glyphicon glyphicon-road logo"></span> Tiene un <em> comportamiento determinista </em>: el paso de un estado interno al siguiente está unívocamente determinado por el estado actualy el símbolo leído en el dispositivo de entrada.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!--Representacion-->
+    <div>
+      <h3>Representación</h3>
+      <p>Existen dos formas, equivalentes, para representar un AFD:</p>
+      <div class="representacion">
+        <div>
+          <h4>TABLA DE TRANSICIONES</h4>
+          <ul class="list-group">
+            <li class="list-group-item">Filas encabezadas por los estados (q<sub>i</sub> &isin; conjunto de estados).
+            </li>
+            <li class="list-group-item">Columnas encabezas por los símbolos de entrada (e<sub>i</sub> &isin; alfabeto de entrada).
+            </li>
+            <li class="list-group-item">En la primera columna, el símbolo <span class="glyphicon glyphicon-arrow-right"></span> marca el estado inicial.
+            </li>
+            <li class="list-group-item">Las filas con asterisco <span class="glyphicon glyphicon-asterisk"></span>, corresponden a estados finales.
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h4>GRAFO DE TRANSICIONES</h4>
+          <ul class="list-group">
+            <li class="list-group-item">Nodos etiquetados por los estados (q<sub>i</sub> &isin; conjunto de estados).
+            </li>
+            <li class="list-group-item">
+              Arcos entre nodos q<sub>i</sub> a q<sub>j</sub> etiquetados como e<sub>i</sub>
+              (símbolo de entrada) si existe la transición de q<sub>i</sub> a q<sub>j</sub> con e<sub>i</sub>.
+            </li>
+            <li class="list-group-item">El estado inicial se señala con una flecha <span class="glyphicon glyphicon-arrow-right"></span>
+            </li>
+            <li class="list-group-item">
+              Y el estado final con
+              <span class="glyphicon glyphicon-asterisk"></span> o doble círculo
+              <span class="glyphicon glyphicon-record"></span>.
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="ejemplosRep">
+        <div id="accordionaccordion" role="tablist" aria-multiselectable="true" class="panel-group">
+          <div class="panel panel-default">
+            <div role="tab" id="headingEjemplo 1" class="panel-heading">
+              <h5 class="panel-title"><a data-toggle="collapse" data-parent="#accordionaccordion" href="#collapseEjemplo1" aria-expanded="true" aria-controls="collapseOne">Ejemplo 1</a></h5>
+            </div>
+            <div id="collapseEjemplo1" role="tabpanel" aria-labelledby="headingEjemplo 1" class="panel-collapse collapse">
+              <div class="panel-body">
+                <div class="col-md-12">
+                  <p>
+                    A<sub>1</sub> = ({q<sub>0</sub>, q<sub>1</sub>, q<sub>2</sub>}, {a, b}, f, q<sub>0</sub>, {q<sub>0</sub>, q<sub>1</sub>}), siendo f :
+                    <br>f(q<sub>0</sub>, a) = q<sub>0</sub>, f (q<sub>0</sub>, b) = q<sub>1</sub>
+                    <br>f(q<sub>1</sub>, a) = q<sub>2</sub>, f (q<sub>1</sub>, b) = q<sub>1</sub>
+                    <br>f(q<sub>2</sub>, a) = q<sub>2</sub>, f (q<sub>2</sub>, b) = q<sub>2</sub>
+                  </p>
+                </div>
+                <div class="col-md-6">
+                  <!--+table-bordered(
+                  [[],['A<sub>1'],['a'],['b']],
+                  [[arrowRight+' '+asterisco]]
+                  )
+                  -->
+                </div>
+                <div class="col-md-6"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="text-center"><a href="#myPage" title="To Top"><span aria-hidden="true" class="glyphicon glyphicon-chevron-up"></span></a>
+      <p>Web creada por MJKX. 2016-2017.</p>
+    </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>
