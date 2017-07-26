@@ -1,4 +1,4 @@
-/* Colores */
+//Mis colores
 $colorTitle:      #303030;
 $colorPrincipal:  #f41806;
 $colorBody:       #535353;
@@ -6,11 +6,27 @@ $lightPrincipal:  lighten($colorPrincipal, 39%);
 $mediumPrincipal: lighten($colorPrincipal, 18%);
 $grey:            #f9f9f9;
 
-/* Custom Boostrap */
-$link-color: $colorPrincipal;
-$carousel-caption-color: $colorBody;
+//Custom Boostrap
+
+///Colores
+$link-color:                $colorPrincipal;
+$link-hover-color:          $colorPrincipal;
+$carousel-caption-color:    $colorBody;
+$list-group-border:         $lightPrincipal;
+$tooltip-color:             $colorTitle;
+$tooltip-bg:                #fff;
+$tooltip-arrow-color:       $colorPrincipal;
+$table-bg:                  #fff;
+$table-bg-accent:           lighten($colorPrincipal, 50%);
+//$table-border-color:        $grey;
+
+  ///Shadows
 $carousel-text-shadow: none;
 
+///Opacity
+$tooltip-opacity: 1;
+
+///Borders
 $list-group-border-radius:  0px;
 $border-radius-base:        0px;
 $border-radius-large:       0px;
@@ -18,3 +34,7 @@ $border-radius-small:       0px;
 $btn-border-radius-base:    0px;
 $btn-border-radius-large:   0px;
 $btn-border-radius-small:   0px;
+$panel-border-radius:       1;
+
+///Width
+$tooltip-arrow-width:       5px;

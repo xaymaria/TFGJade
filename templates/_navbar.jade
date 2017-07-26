@@ -6,8 +6,11 @@ mixin nav_tooltip(href, title)
   title=title)
     block
 
+block link
+  -var selected = 'home'; //default
+
 +navbar-fixed("URJC","myNavbar")
-  +nav_item("index.html","active") AUTÓMATAS
+  +nav_item("index.html").active AUTÓMATAS
   +nav_tooltip("afd.html", "Autómatas Finitos Deterministas") AFD
   +nav_tooltip("afnd.html", "Autómatas Finitos No Deterministas") AFND
   +nav_tooltip("aapilas.html", "Autómatas a pilas") A. A PILAS

@@ -58,10 +58,7 @@ html(lang="es")
 		block styles
 			//link(rel="stylesheet",href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css")
 			link(href="css/style.css", rel='stylesheet')
-		block scripts
-			script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js")
-			script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js")
-			script(src="js/main.js")
+
 
 	body(data-spy="scroll",data-target=".scrollspy")#myPage
 		block body
@@ -73,5 +70,10 @@ html(lang="es")
 			block content
 			block footer
 				include templates/_footer
+
+		block scripts
+			script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js")
+			script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js")
+			script(src="js/main.js")
 
 
