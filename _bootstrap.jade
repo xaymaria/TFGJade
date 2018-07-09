@@ -48,16 +48,17 @@ include templates/myMixins
 doctype html
 html(lang="es")
 	head
-		meta(charset="UTF-8")
-		meta(http-equiv="X-UA-Compatible", content="IE=edge")
+		meta(http-equiv="Content-Type", content="text/html; charset=utf-8")
 		meta(name="viewport",content="width=device-width, initial-scale=1")
 		meta(name="description",content="")
 		meta(name="author",content="")
-		//link(rel="icon",href="../../favicon.ico")
+		block meta
 		title Autómatas y máquinas de Turing
 		block styles
-			//link(rel="stylesheet",href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css")
 			link(href="css/style.css", rel='stylesheet')
+			link(href="css/bootstrap-select.min.css", rel='stylesheet')
+			link(href="css/font-awesome.min.css", rel='stylesheet')
+			link(href="css/material-icons.css", rel='stylesheet')
 
 
 	body(data-spy="scroll",data-target=".scrollspy")#myPage
@@ -72,8 +73,9 @@ html(lang="es")
 				include templates/_footer
 
 		block scripts
-			script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js")
-			script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js")
+			script(src="js/jquery-3.2.1.min.js")
+			script(src="js/bootstrap.min.js")
+			script(src="js/bootstrap-select.min.js")
 			script(src="js/main.js")
 
 

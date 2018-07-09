@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Autómatas y máquinas de Turing</title>
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/bootstrap-select.min.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/material-icons.css" rel="stylesheet">
+  </head>
+  <body data-spy="scroll" data-target=".scrollspy" id="myPage">
+    <nav role="navigation" class="navbar navbar-fixed-top navbar-default">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" data-toggle="collapse" data-target="#myNavbar" aria-expanded="false" class="navbar-toggle collapsed"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a href="index.html" class="navbar-brand">URJC</a>
+        </div>
+        <div id="myNavbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="index.html">AUTÓMATAS</a></li>
+                <li><a href="afd.html" data-toggle="tooltip" data-placement="bottom" title="Autómatas Finitos Deterministas">AFD</a></li>
+                <li><a href="afnd.html" data-toggle="tooltip" data-placement="bottom" title="Autómatas Finitos No Deterministas">AFND</a></li>
+                <li><a href="aapilas.html" data-toggle="tooltip" data-placement="bottom" title="Autómatas a pilas">A. A PILAS</a></li>
+                <li><a href="turing.html" data-toggle="tooltip" data-placement="bottom" title="Máquinas de Turing">M. DE TURING</a></li>
+                <li><a href="mtGenerator.html" data-toggle="tooltip" data-placement="bottom" title="Editor de Máquinas de Turing">MT EDITOR</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div id="titulo" class="jumbotron text-center">
+      <h1>Autómatas y máquinas de Turing</h1>
+    </div>
+    <div class="first esquema">
+      <h2>¿Qué es un Autómata Finito No Determinista?</h2>
+      <p>
+        <big>Un Autómata Finito No Determinista (AFND) es una quíntupla:</big>
+      </p>
+      <h3>(<a data-toggle="tooltip" data-placement="left" title="Conjunto finito no vacío de elementos denominado estados internos o conjunto de estados">Q, </a><a data-toggle="tooltip" data-placement="top" title="Alfabeto de entrada">&Sigma;, </a><a data-toggle="tooltip" data-placement="top" title="Función de transición">&fnof;, </a><a data-toggle="tooltip" data-placement="top" title="Estado inicial">q<sub>0</sub>, </a><a data-toggle="tooltip" data-placement="right" title="Subconjunto de Q denominado estados finales o de aceptación">F</a>)
+      </h3>
+    </div>
+    <!--Caracteristicas-->
+    <div>
+      <h3>Características principales de un AFND</h3>
+      <p>Los AFNDs presentan las mismas características que los AFDs <em>salvo en lo que respecta al determinismo:</em></p>
+      <div class="table-afd">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Tiene un comportamiento <em>no determinista</em>: el cambio de estado interno <em>no está unívocamente determinado</em> por el estado actual y el símbolo leído en el dispositivo de entrada.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p>El no determinismo de los AFNDs se traduce en las tres siguientes diferencias fundamentales respecto a los AFDs:</p>
+      <div class="table-afd">
+        <!--+table-striped(
+        [],
+        [
+          [
+            ['<em>Los pares (estado, símbolo de entrada) pueden tener asociado más de un estado siguiente.</em>'+
+            '<br>Ej.: f(q,a) = {p,q,r}'],
+            ['<img src="./images/AFND-Carac.jpg"/>'] //dibujo
+          ],
+          [
+            [], //dibujo
+            ['<em>Los estados pueden transitar a otros estados por sí mismos</em>, sin necesidad de leer ningún símbolo de la cinta de entrada.'+
+            'Estas transiciones se llaman transiciones '+lamda+' (lamda). <br>Ej.: f(q,'+lamda+') = {r,s}']
+          ],
+          [
+            ['Con la lectura de cada símbolo de entrada <em>se pasa del conjunto de estado actual al conjunto de estados siguiente.</em>'+
+              'Se hace teniendo no solo en cuenta las transiciones para el símbolo leído sino también las transiciones '+lamda+'.'],
+            ['f(q,a) = Ø']
+          ]
+        ]
+        )
+        -->
+        <table class="table table-striped">
+          <tbody>
+            <tr>
+              <td><em>Los pares (estado, símbolo de entrada) pueden tener asociado más de un estado siguiente.</em><br> Ej.: f(q,a) = {p,q,r}</td>
+              <td>
+                <p class="bgGrey"><img src="./images/AFND-Carac.jpg"></p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p class="bgGrey"><img src="./images/AFND-Carac2.jpg"></p>
+              </td>
+              <td>
+                Los estados pueden transitar a otros estados por sí mismos</em>, sin necesidad de leer ningún símbolo de la cinta de entrada.
+                Estas transiciones se llaman transiciones &#955; (lamda). <br>Ej.: f(q, &#955;) = {r,s}
+                <br>Ej.: f(q,a) = {p,q,r}
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Con la lectura de cada símbolo de entrada <em>se pasa del conjunto de estado actual al conjunto de estados siguiente.</em>
+                Se hace teniendo no solo en cuenta las transiciones para el símbolo leído sino también las transiciones &#955;
+              </td>
+              <td>
+                <p class="bgGrey">f(q,a) = Ø</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!--Representacion-->
+    <div>
+      <h3>Representación</h3>
+      <p>Al igual que los AFDs, los AFNDs se pueden representar tanto mediante una tabla como mediante un grafo de transiciones.</p>
+      <div class="representacion">
+        <div>
+          <h4>Tabla de transiciones de un AFND</h4>
+          <p class="pColor">
+            Es igual que la Tabla de transiciones de un AFD salvo que tiene una columna más a la derecha de la tabla, etiquetada con λ,
+            en la que se reflejan los valores de las transiciones λ, es decir, los valores f(qi, λ), i ∈ {0, ..., n}.
+            
+          </p>
+        </div>
+        <div>
+          <h4>Grado de transiciones de un AFND</h4>
+          <div class="pColor">El grafo de transiciones de un AFND se construye igual que el grafo de transiciones de un AFD pero sustituyendo el punto relativo a los arcos (el penúltimo) por lo siguiente:
+            <p class="pWhite">
+              Cada transición de la forma f(q<sub>i</sub> , a) = {q<sub>i1</sub>, . . . , q<sub>in<sub>i</sub></sub> },
+              i, i1, . . . , in<sub>i</sub> ∈ {0, . . . , n}, a ∈ &Sigma; ∪ {&lambda;}, da lugar a n<sub>i</sub> arcos dirigidos
+              desde el nodo q<sub>i</sub> hacia cada uno de los nodos q<sub>i1</sub>, . . . , q<sub>in<sub>i</sub></sub> ,
+              etiquetados todos ellos con el símbolo <i>a</i>.
+              
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="ejemplosRep mt15">
+        <div id="accordionaccordion" role="tablist" aria-multiselectable="true" class="panel-group">
+          <div class="panel panel-default">
+            <div role="tab" id="headingEjemplo 1" data-toggle="collapse" data-parent="#accordionaccordion" href="#collapseEjemplo1" aria-expanded="true" aria-controls="collapseOne" class="panel-heading">
+              <h5 class="panel-title"><a>Ejemplo 1</a></h5>
+            </div>
+            <div id="collapseEjemplo1" role="tabpanel" aria-labelledby="headingEjemplo 1" class="panel-collapse collapse">
+              <div class="panel-body">
+                <div class="col-md-12">
+                  <p>
+                    A<sub>1</sub> = {q<sub>0</sub>, q<sub>1</sub>, q<sub>2</sub>, q<sub>3</sub>}, {0, 1}, f, q<sub>0</sub>, {q<sub>2</sub>, q<sub>3</sub>}, siendo f :
+                    <br> f(q<sub>0</sub>, a) = {q<sub>1</sub>, q<sub>3</sub>}, f(q<sub>0</sub>, b) = ∅, f(q<sub>0</sub>, &#955;) = ∅
+                    <br> f(q<sub>1</sub>, a) = ∅,     f(q<sub>1</sub>, b) = q<sub>2</sub>, f(q<sub>1</sub>, &#955;) = ∅
+                    <br> f(q<sub>2</sub>, a) = ∅,     f(q<sub>2</sub>, b) = ∅,     f(q<sub>2</sub>, &#955;) = q<sub>1</sub>
+                    <br> f(q<sub>3</sub>, a) = q<sub>0</sub>, f(q<sub>3</sub>, b) = q<sub>3</sub>, f(q<sub>3</sub>, &#955;) = ∅
+                  </p>
+                </div>
+                <div class="col-md-6">
+                  <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th>
+                        </th>
+                        <th>A<sub>1</sub>
+                        </th>
+                        <th>a
+                        </th>
+                        <th>b
+                        </th>
+                        <th>&#955;
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><span class="glyphicon glyphicon-arrow-right"></span>
+                        </td>
+                        <td>q<sub>0</sub>
+                        </td>
+                        <td>{q<sub>1</sub>, q<sub>3</sub>}
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                        </td>
+                        <td>q<sub>1</sub>
+                        </td>
+                        <td>
+                        </td>
+                        <td>{q<sub>2</sub>}
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td><span class="glyphicon glyphicon-asterisk"></span>
+                        </td>
+                        <td>q<sub>2</sub>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>{q<sub>1</sub>}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td><span class="glyphicon glyphicon-asterisk"></span>
+                        </td>
+                        <td>q<sub>3</sub>
+                        </td>
+                        <td>{q<sub>0</sub>}
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="col-md-6 bgGrey"><img src="./images/AFND-Example.jpg"></div>
+              </div>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div role="tab" id="headingEjemplo 2" data-toggle="collapse" data-parent="#accordionaccordion" href="#collapseEjemplo2" aria-expanded="true" aria-controls="collapseOne" class="panel-heading">
+              <h5 class="panel-title"><a>Ejemplo 2</a></h5>
+            </div>
+            <div id="collapseEjemplo2" role="tabpanel" aria-labelledby="headingEjemplo 2" class="panel-collapse collapse">
+              <div class="panel-body">
+                <div class="col-md-12">
+                  <p>
+                    A<sub>2</sub> =({q<sub>0</sub>, q<sub>1</sub>, q<sub>2</sub>, q<sub>3</sub>}, {0, 1}, f, q<sub>0</sub>, {q<sub>2</sub>}, siendo f :
+                    <br>f(q<sub>0</sub>, 0) = ∅,       f(q<sub>0</sub>, 1) = {q<sub>1</sub>}, f(q<sub>0</sub>, &#955;) = q<sub>2</sub>
+                    <br>f(q<sub>1</sub>, 0) = {q<sub>2</sub>}, f(q<sub>1</sub>, 1) = ∅, f(q<sub>1</sub>, &#955;) = ∅
+                    <br>f(q<sub>2</sub>, 0) = ∅,       f(q<sub>2</sub>, 1) = ∅, f(q<sub>2</sub>, &#955;) = {q<sub>3</sub>}
+                    <br>f(q<sub>3</sub>, 0) = ∅,       f(q<sub>3</sub>, 1) = ∅, f(q<sub>3</sub>, &#955;) = {q<sub>0</sub>}
+                  </p>
+                </div>
+                <div class="col-md-6">
+                  <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th>
+                        </th>
+                        <th>A<sub>2</sub>
+                        </th>
+                        <th>0
+                        </th>
+                        <th>1
+                        </th>
+                        <th>&#955;
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><span class="glyphicon glyphicon-arrow-right"></span>
+                        </td>
+                        <td>q<sub>0</sub>
+                        </td>
+                        <td>
+                        </td>
+                        <td>{q<sub>1</sub>}
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                        </td>
+                        <td>q<sub>1</sub>
+                        </td>
+                        <td>{q<sub>2</sub>}
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td><span class="glyphicon glyphicon-asterisk"></span>
+                        </td>
+                        <td>q<sub>2</sub>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>{q<sub>3</sub>}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                        </td>
+                        <td>q<sub>3</sub>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>{q<sub>0</sub>}
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="col-md-6 bgGrey"><img src="./images/AFND2-Example.jpg"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="funcionamiento">
+      <h3>Funcionamiento de un AFD</h3>
+      <div class="inicio">
+        <div>
+          <p>
+            <b>Inicio:</b>
+            <br>El conjunto de estados internos asociado con el AFND contiene el <em>estado inicial y todos a los que puede
+            llegar desde él mediante transiciones λ</em>; el cabezal de lectura está situado en la posición más a la izquierda
+            de la cinta de entrada.
+          </p>
+        </div>
+        <div><img src="./images/AFND2-Func-Inicio.jpg"></div>
+      </div>
+      <div class="mientras">
+        <div><img src="./images/AFND2-Func-Dos.jpg"></div>
+        <div>
+          <p><b>Mientras haya símbolos por leer en la cinta de entrada y <em>el conjunto de estados actual asociado con el AFND no sea vacío:</em></b>
+            <ul>
+              <li>El cabezal de lectura <em>lee el símbolo</em> sobre el que está situado y avanza una casilla a la derecha.</li>
+              <li>
+                El autómata calcula el <em>conjunto de estados siguiente</em>, formado por todos los estados a los que se puede
+                llegar, partiendo de alguno de los estados actuales, mediante una transición con el símbolo leído en la
+                entrada, precedida y/o seguida de cero o más transiciones λ (tantas como se quiera y pueda).
+              </li>
+            </ul>
+          </p>
+        </div>
+      </div>
+      <div class="fin">
+        <p><b>Fin.</b> La salida del AFND es:</p>
+        <div>
+          <b>Afirmativa:</b> si el conjunto de estados en el que se encuentra el autómata contiene algún estado final.
+          <br><i>Ejemplo: Entrada 1010</i>
+          <p><b><u>1</u></b>010 <br><img src="./images/AFND2-Func-Dos.jpg"></p>
+          <p>1<b><u>0</u></b>10 <br><img src="./images/AFND2-Func-2.jpg"></p>
+          <p>10(<b><u>λ</u></b>)10 <br><img src="./images/AFND2-Func-3.jpg"></p>
+          <p>10(<b><u>λ</u></b>)10 <br><img src="./images/AFND2-Func4.jpg"></p>
+          <p>10<b><u>1</u></b>0 <br><img src="./images/AFND2-Func-Dos.jpg"></p>
+          <p>101<b><u>0</u></b> <br><img src="./images/AFND2-Func-2.jpg"></p>
+        </div>
+        <div>
+          <b>Negativa:</b> caso contrario.
+          <br><i>Ejemplo: Entrada 101</i>
+          <p><b><u>1</u></b>01 <br><img src="./images/AFND2-Func-Dos.jpg"></p>
+          <p><b><u>1</u></b>01 <br><img src="./images/AFND2-Func-2.jpg"></p>
+          <p><b><u>1</u></b>01 <br><img src="./images/AFND2-Func-3.jpg"></p>
+          <p><b><u>1</u></b>01 <br><img src="./images/AFND2-Func4.jpg"></p>
+          <p><b><u>1</u></b>01 <br><img src="./images/AFND2-Func-Dos.jpg"></p>
+        </div>
+      </div>
+    </div>
+    <footer class="text-center"><a href="#myPage" title="To Top"><span aria-hidden="true" class="glyphicon glyphicon-chevron-up"></span></a>
+      <p>Web creada por MJKX. 2018.</p>
+    </footer>
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-select.min.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>

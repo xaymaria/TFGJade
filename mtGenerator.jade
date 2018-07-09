@@ -1,0 +1,96 @@
+extends _bootstrap
+
+block jumbotron
+  #formCadena
+    form.form-inline
+      .form-group
+        input.form-control.input-lg#cadena(
+          type="text"
+          size="50"
+          maxlength="50"
+          placeholder="Introduce una cadena de entrada (max. 50 caracteres)"
+          data-spy="affix"
+          data-offset-top="60"
+          )
+      .form-group
+        +btn('Comprobar','danger','lg comprobarCadena')
+      .form-group.switch-mt
+        input#switchMT(type='checkbox')
+        label.checkbox-inline(
+          for = "switchMT"
+          data-off-text  = "Reconocedor"
+          data-on-text = "Transductor"
+          data-toggle = "tooltip"
+          data-placement = "right"
+          title = "Selecciona para cambiar de tipo"
+        )
+    #result
+      .result
+      +btn('Log','default pull-right mostrarLog')
+
+
+block content
+  #container(style="padding: 30px 100px;")
+    .tablaEstados
+      table.table.table-striped.table-hover
+        thead
+          th Estados
+          th Final
+        tbody
+          tr
+            td q0
+            td
+              .checkbox-rotate
+                label.input-checkbox
+                  input(type="checkbox" name="esFinal-0" id="esFinal-0" data-num="0")
+                  span.spanCheck
+      //Agregar estado //Borrar último estado
+      +btn('Agregar Estado','danger addState')
+      +btn('Borrar último estado', 'default confirmDeleteState')
+
+
+    .tablaTrans
+      //Formulario para agregar transiciones
+      form.form-group.formTransicion
+        div: +selectState('origen','Estado Origen')
+        div: +selectState('destino','Estado Destino')
+        div: +myInput('entrada','Simb. Entrada')
+        div: +myInput('salida','Simb. Salida')
+        div
+          label Dirección
+          select.selectpicker#direccion(name="direccion", title="Selecciona", data-width="100%")
+            option(value="R") Derecha (R)
+            option(value="L") Izquierda (L)
+            option(value="S") Parado (S)
+        #addTransition
+          +btn('Agregar transición','danger addTransition')
+
+      +table(
+        ['Estado Origen', 'Estado Destino', 'Simb. Entrada', 'Simb. Salida', 'Dirección', 'Borrar'],'',"table-striped table-hover")
+        tr#sinTrans: td(colspan="6") Sin transiciones
+
+
+  // Modal del log
+  +modal('Log', 'log')
+    .log
+
+  +modal('Error', 'modalError')
+    p.msgError
+
+  +modal('Borrar estado', 'modalBorrarEstado')
+    p ¿Desea continuar el borrado del último estado?
+      | <br> Nota: Se eliminarán también las transiciones que contengan dicho estado.
+    .modal-footer.footer-options
+      +btn('Sí', 'danger deleteState')
+      +btn('No', 'default')
+
+block footer
+  nav.navbar-fixed-bottom.navbar-inverse
+    //- Cargar y guardar
+    +a-btn('#','default cargarMT') Cargar
+    +a-btn('#','default guardarMT') Guardar
+    input#cargarMT.hidden(type="file" name="cargarMT")
+
+
+append scripts
+  script(src="js/generator.js")

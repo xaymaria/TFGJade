@@ -8,12 +8,16 @@ mixin table(header,data,type)
           each head, i in header
             th
               != head
-    tbody
-      each row,j in data
-        tr
-          each col,k in row
-            td
-              != col
+    if data
+      tbody
+        each row,j in data
+          tr
+            each col,k in row
+              td
+                != col
+    unless data
+      tbody
+        block
 
 mixin table-striped(header,data)
   +table(header,data,"table-striped")

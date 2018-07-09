@@ -1,0 +1,193 @@
+extends _bootstrap
+
+block content
+  .first.esquema
+    h2 ¿Qué es un Autómata Finito No Determinista?
+    p: big Un Autómata Finito No Determinista (AFND) es una quíntupla:
+    h3 (
+      +tooltip-left('Q, ', 'Conjunto finito no vacío de elementos denominado estados internos o conjunto de estados')
+      +tooltip-top('&Sigma;, ', "Alfabeto de entrada")
+      +tooltip-top('&fnof;, ', "Función de transición")
+      +tooltip-top('q<sub>0</sub>, ', "Estado inicial")
+      +tooltip-right('F', "Subconjunto de Q denominado estados finales o de aceptación")
+      | )
+
+  //Caracteristicas
+  div
+    h3 Características principales de un AFND
+    p Los AFNDs presentan las mismas características que los AFDs <em>salvo en lo que respecta al determinismo:</em>
+    .table-afd
+      +table-striped(
+        [],
+        [
+          ['Tiene un comportamiento <em>no determinista</em>: el cambio de estado interno <em>no está'+
+          ' unívocamente determinado</em> por el estado actual y el símbolo leído en el dispositivo de entrada.']
+        ]
+      )
+
+    p El no determinismo de los AFNDs se traduce en las tres siguientes diferencias fundamentales respecto a los AFDs:
+    .table-afd
+      //+table-striped(
+        [],
+        [
+          [
+            ['<em>Los pares (estado, símbolo de entrada) pueden tener asociado más de un estado siguiente.</em>'+
+            '<br>Ej.: f(q,a) = {p,q,r}'],
+            ['<img src="./images/AFND-Carac.jpg"/>'] //dibujo
+          ],
+          [
+            [], //dibujo
+            ['<em>Los estados pueden transitar a otros estados por sí mismos</em>, sin necesidad de leer ningún símbolo de la cinta de entrada.'+
+            'Estas transiciones se llaman transiciones '+lamda+' (lamda). <br>Ej.: f(q,'+lamda+') = {r,s}']
+          ],
+          [
+            ['Con la lectura de cada símbolo de entrada <em>se pasa del conjunto de estado actual al conjunto de estados siguiente.</em>'+
+              'Se hace teniendo no solo en cuenta las transiciones para el símbolo leído sino también las transiciones '+lamda+'.'],
+            ['f(q,a) = Ø']
+          ]
+        ]
+        )
+      table.table.table-striped
+        tbody
+          tr
+            td
+              em Los pares (estado, símbolo de entrada) pueden tener asociado más de un estado siguiente.
+              | <br> Ej.: f(q,a) = {p,q,r}
+            td
+              p.bgGrey: img(src="./images/AFND-Carac.jpg")
+          tr
+            td
+              p.bgGrey: img(src="./images/AFND-Carac2.jpg")
+            td.
+              Los estados pueden transitar a otros estados por sí mismos</em>, sin necesidad de leer ningún símbolo de la cinta de entrada.
+              Estas transiciones se llaman transiciones !{lamda} (lamda). <br>Ej.: f(q, !{lamda}) = {r,s}
+              <br>Ej.: f(q,a) = {p,q,r}
+          tr
+            td.
+              Con la lectura de cada símbolo de entrada <em>se pasa del conjunto de estado actual al conjunto de estados siguiente.</em>
+              Se hace teniendo no solo en cuenta las transiciones para el símbolo leído sino también las transiciones !{lamda}
+            td: p.bgGrey f(q,a) = Ø
+
+
+  //Representacion
+  div
+    h3 Representación
+    p Al igual que los AFDs, los AFNDs se pueden representar tanto mediante una tabla como mediante un grafo de transiciones.
+    .representacion
+      div
+        h4 Tabla de transiciones de un AFND
+        p.pColor.
+          Es igual que la Tabla de transiciones de un AFD salvo que tiene una columna más a la derecha de la tabla, etiquetada con λ,
+          en la que se reflejan los valores de las transiciones λ, es decir, los valores f(qi, λ), i ∈ {0, ..., n}.
+
+      div
+        h4 Grado de transiciones de un AFND
+        div.pColor
+          | El grafo de transiciones de un AFND se construye igual que el grafo de transiciones de un AFD pero sustituyendo el punto relativo a los arcos (el penúltimo) por lo siguiente:
+          p.pWhite.
+            Cada transición de la forma f(q<sub>i</sub> , a) = {q<sub>i1</sub>, . . . , q<sub>in<sub>i</sub></sub> },
+            i, i1, . . . , in<sub>i</sub> ∈ {0, . . . , n}, a ∈ &Sigma; ∪ {&lambda;}, da lugar a n<sub>i</sub> arcos dirigidos
+            desde el nodo q<sub>i</sub> hacia cada uno de los nodos q<sub>i1</sub>, . . . , q<sub>in<sub>i</sub></sub> ,
+            etiquetados todos ellos con el símbolo <i>a</i>.
+
+    .ejemplosRep.mt15
+      +accordion('accordion')
+        +accordion-item-default('Ejemplo 1','accordion', false)
+          .col-md-12
+            p.
+              !{A1} = {!{q0}, !{q1}, !{q2}, !{q3}}, {0, 1}, f, !{q0}, {!{q2}, !{q3}}, siendo f :
+              <br> f(!{q0}, a) = {!{q1}, !{q3}}, f(!{q0}, b) = ∅, f(!{q0}, !{lamda}) = ∅
+              <br> f(!{q1}, a) = ∅,     f(!{q1}, b) = !{q2}, f(!{q1}, !{lamda}) = ∅
+              <br> f(!{q2}, a) = ∅,     f(!{q2}, b) = ∅,     f(!{q2}, !{lamda}) = !{q1}
+              <br> f(!{q3}, a) = !{q0}, f(!{q3}, b) = !{q3}, f(!{q3}, !{lamda}) = ∅
+          //- Tabla
+          .col-md-6
+            +table-bordered(
+            [[], [A1], ['a'], ['b'], [lamda]], //head
+            [
+              [[arrowRight], [q0], ['{'+q1+', '+q3+'}'], [], []],
+              [[], [q1], [], ['{'+q2+'}'], []],
+              [[asterisco], [q2], [], [], ['{'+q1+'}']],
+              [[asterisco], [q3], ['{'+q0+'}'], [], []]
+            ]
+            )
+          //- Dibujo
+          .col-md-6.bgGrey
+            img(src="./images/AFND-Example.jpg")
+
+        +accordion-item-default('Ejemplo 2','accordion',false)
+          .col-md-12
+            p.
+              !{A2} =({!{q0}, !{q1}, !{q2}, !{q3}}, {0, 1}, f, !{q0}, {!{q2}}, siendo f :
+              <br>f(!{q0}, 0) = ∅,       f(!{q0}, 1) = {!{q1}}, f(!{q0}, !{lamda}) = !{q2}
+              <br>f(!{q1}, 0) = {!{q2}}, f(!{q1}, 1) = ∅, f(!{q1}, !{lamda}) = ∅
+              <br>f(!{q2}, 0) = ∅,       f(!{q2}, 1) = ∅, f(!{q2}, !{lamda}) = {!{q3}}
+              <br>f(!{q3}, 0) = ∅,       f(!{q3}, 1) = ∅, f(!{q3}, !{lamda}) = {!{q0}}
+          .col-md-6
+            +table-bordered(
+            [[], [A2], ['0'], ['1'], [lamda]], //head
+            [
+              [[arrowRight], [q0], [], ['{'+q1+'}'], []],
+              [[], [q1], ['{'+q2+'}'], [], []],
+              [[asterisco], [q2], [], [], ['{'+q3+'}']],
+              [[], [q3], [], [], ['{'+q0+'}']]
+            ]
+            )
+          .col-md-6.bgGrey
+            img(src="./images/AFND2-Example.jpg")
+  .funcionamiento
+    h3 Funcionamiento de un AFD
+    .inicio
+      div
+        p.
+          <b>Inicio:</b>
+          <br>El conjunto de estados internos asociado con el AFND contiene el <em>estado inicial y todos a los que puede
+          llegar desde él mediante transiciones λ</em>; el cabezal de lectura está situado en la posición más a la izquierda
+          de la cinta de entrada.
+      div
+        img(src="./images/AFND2-Func-Inicio.jpg")
+    .mientras
+      div
+        img(src="./images/AFND2-Func-Dos.jpg")
+      div
+        p <b>Mientras haya símbolos por leer en la cinta de entrada y <em>el conjunto de estados actual asociado con el AFND no sea vacío:</em></b>
+          ul
+            li El cabezal de lectura <em>lee el símbolo</em> sobre el que está situado y avanza una casilla a la derecha.
+            li.
+              El autómata calcula el <em>conjunto de estados siguiente</em>, formado por todos los estados a los que se puede
+              llegar, partiendo de alguno de los estados actuales, mediante una transición con el símbolo leído en la
+              entrada, precedida y/o seguida de cero o más transiciones λ (tantas como se quiera y pueda).
+    .fin
+      p
+        <b>Fin.</b> La salida del AFND es:
+      div
+        <b>Afirmativa:</b> si el conjunto de estados en el que se encuentra el autómata contiene algún estado final.
+        <br><i>Ejemplo: Entrada 1010</i>
+        p <b><u>1</u></b>010 <br>
+          img(src="./images/AFND2-Func-Dos.jpg")
+        p 1<b><u>0</u></b>10 <br>
+          img(src="./images/AFND2-Func-2.jpg")
+        p 10(<b><u>λ</u></b>)10 <br>
+          img(src="./images/AFND2-Func-3.jpg")
+        p 10(<b><u>λ</u></b>)10 <br>
+          img(src="./images/AFND2-Func4.jpg")
+        p 10<b><u>1</u></b>0 <br>
+          img(src="./images/AFND2-Func-Dos.jpg")
+        p 101<b><u>0</u></b> <br>
+          img(src="./images/AFND2-Func-2.jpg")
+
+
+      div
+        <b>Negativa:</b> caso contrario.
+        <br><i>Ejemplo: Entrada 101</i>
+        p <b><u>1</u></b>01 <br>
+          img(src="./images/AFND2-Func-Dos.jpg")
+        p <b><u>1</u></b>01 <br>
+          img(src="./images/AFND2-Func-2.jpg")
+        p <b><u>1</u></b>01 <br>
+          img(src="./images/AFND2-Func-3.jpg")
+        p <b><u>1</u></b>01 <br>
+          img(src="./images/AFND2-Func4.jpg")
+        p <b><u>1</u></b>01 <br>
+          img(src="./images/AFND2-Func-Dos.jpg")
+

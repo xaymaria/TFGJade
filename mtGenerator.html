@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Autómatas y máquinas de Turing</title>
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/bootstrap-select.min.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/material-icons.css" rel="stylesheet">
+  </head>
+  <body data-spy="scroll" data-target=".scrollspy" id="myPage">
+    <nav role="navigation" class="navbar navbar-fixed-top navbar-default">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" data-toggle="collapse" data-target="#myNavbar" aria-expanded="false" class="navbar-toggle collapsed"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a href="index.html" class="navbar-brand">URJC</a>
+        </div>
+        <div id="myNavbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="index.html">AUTÓMATAS</a></li>
+                <li><a href="afd.html" data-toggle="tooltip" data-placement="bottom" title="Autómatas Finitos Deterministas">AFD</a></li>
+                <li><a href="afnd.html" data-toggle="tooltip" data-placement="bottom" title="Autómatas Finitos No Deterministas">AFND</a></li>
+                <li><a href="aapilas.html" data-toggle="tooltip" data-placement="bottom" title="Autómatas a pilas">A. A PILAS</a></li>
+                <li><a href="turing.html" data-toggle="tooltip" data-placement="bottom" title="Máquinas de Turing">M. DE TURING</a></li>
+                <li><a href="mtGenerator.html" data-toggle="tooltip" data-placement="bottom" title="Editor de Máquinas de Turing">MT EDITOR</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div id="formCadena">
+      <form class="form-inline">
+        <div class="form-group">
+          <input id="cadena" type="text" size="50" maxlength="50" placeholder="Introduce una cadena de entrada (max. 50 caracteres)" data-spy="affix" data-offset-top="60" class="form-control input-lg">
+        </div>
+        <div class="form-group">
+          <button type="button" class="btn btn-danger btn-lg comprobarCadena">Comprobar</button>
+        </div>
+        <div class="form-group switch-mt">
+          <input id="switchMT" type="checkbox">
+          <label for="switchMT" data-off-text="Reconocedor" data-on-text="Transductor" data-toggle="tooltip" data-placement="right" title="Selecciona para cambiar de tipo" class="checkbox-inline"></label>
+        </div>
+      </form>
+      <div id="result">
+        <div class="result"></div>
+        <button type="button" class="btn btn-default pull-right mostrarLog">Log</button>
+      </div>
+    </div>
+    <div id="container" style="padding: 30px 100px;">
+      <div class="tablaEstados">
+        <table class="table table-striped table-hover">
+          <thead>
+            <th>Estados</th>
+            <th>Final</th>
+          </thead>
+          <tbody>
+            <tr>
+              <td>q0</td>
+              <td>
+                <div class="checkbox-rotate">
+                  <label class="input-checkbox">
+                    <input type="checkbox" name="esFinal-0" id="esFinal-0" data-num="0"><span class="spanCheck"></span>
+                  </label>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <!--Agregar estado //Borrar último estado-->
+        <button type="button" class="btn btn-danger addState">Agregar Estado</button>
+        <button type="button" class="btn btn-default confirmDeleteState">Borrar último estado</button>
+      </div>
+      <div class="tablaTrans">
+        <!--Formulario para agregar transiciones-->
+        <form class="form-group formTransicion">
+          <div>
+            <label for="origen">Estado Origen</label>
+            <select id="origen" name="origen" data-live-search="true" title="Selecciona" data-width="100%" data-size="5" class="selectpicker">
+              <option data-tokens="0 q0" value="q0">q0</option>
+            </select>
+          </div>
+          <div>
+            <label for="destino">Estado Destino</label>
+            <select id="destino" name="destino" data-live-search="true" title="Selecciona" data-width="100%" data-size="5" class="selectpicker">
+              <option data-tokens="0 q0" value="q0">q0</option>
+            </select>
+          </div>
+          <div>
+            <label for="entrada">Simb. Entrada</label>
+            <div class="input-group">
+              <input type="text" id="entrada" name="entrada" maxlength="1" size="1" class="form-control"/><span rel="tooltip" title="Insertar espacio" class="input-group-addon insertSpace"><i>&#9679;</i></span>
+            </div>
+          </div>
+          <div>
+            <label for="salida">Simb. Salida</label>
+            <div class="input-group">
+              <input type="text" id="salida" name="salida" maxlength="1" size="1" class="form-control"/><span rel="tooltip" title="Insertar espacio" class="input-group-addon insertSpace"><i>&#9679;</i></span>
+            </div>
+          </div>
+          <div>
+            <label>Dirección</label>
+            <select id="direccion" name="direccion" title="Selecciona" data-width="100%" class="selectpicker">
+              <option value="R">Derecha (R)</option>
+              <option value="L">Izquierda (L)</option>
+              <option value="S">Parado (S)</option>
+            </select>
+          </div>
+          <div id="addTransition">
+            <button type="button" class="btn btn-danger addTransition">Agregar transición</button>
+          </div>
+        </form>
+        <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th>Estado Origen
+              </th>
+              <th>Estado Destino
+              </th>
+              <th>Simb. Entrada
+              </th>
+              <th>Simb. Salida
+              </th>
+              <th>Dirección
+              </th>
+              <th>Borrar
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr id="sinTrans">
+              <td colspan="6">Sin transiciones</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!-- Modal del log-->
+    <div id="log" tabindex="-1" role="dialog" aria-labelledby="logLabel" aria-hidden="true" style="background-color: initial" class="modal fade">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" data-dismiss="modal" class="close"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h3 id="logLabel" class="modal-title">Log</h3>
+          </div>
+          <div class="modal-body">
+            <div class="log"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="modalError" tabindex="-1" role="dialog" aria-labelledby="modalErrorLabel" aria-hidden="true" style="background-color: initial" class="modal fade">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" data-dismiss="modal" class="close"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h3 id="modalErrorLabel" class="modal-title">Error</h3>
+          </div>
+          <div class="modal-body">
+            <p class="msgError"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="modalBorrarEstado" tabindex="-1" role="dialog" aria-labelledby="modalBorrarEstadoLabel" aria-hidden="true" style="background-color: initial" class="modal fade">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" data-dismiss="modal" class="close"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h3 id="modalBorrarEstadoLabel" class="modal-title">Borrar estado</h3>
+          </div>
+          <div class="modal-body">
+            <p>
+              ¿Desea continuar el borrado del último estado?
+              <br> Nota: Se eliminarán también las transiciones que contengan dicho estado.
+            </p>
+            <div class="modal-footer footer-options">
+              <button type="button" class="btn btn-danger deleteState">Sí</button>
+              <button type="button" class="btn btn-default">No</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar-fixed-bottom navbar-inverse"><a href="#" role="button" class="btn btn-default cargarMT">Cargar</a><a href="#" role="button" class="btn btn-default guardarMT">Guardar</a>
+      <input id="cargarMT" type="file" name="cargarMT" class="hidden">
+    </nav>
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-select.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/generator.js"></script>
+  </body>
+</html>

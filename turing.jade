@@ -1,0 +1,126 @@
+extends _bootstrap
+
+block content
+  //- Introducción
+  div
+    h2 MÁQUINAS DE TURING
+    h3 Introducción
+    p La máquina de Turing (MT) fue descrita por
+      span.tooltip-effect
+        span.tooltip-item Alan Turing
+        span.tooltip-content.clearfix
+          img(src="images/Alan_Turing_Aged_16.jpg")
+          span.tooltip-text
+            strong Alan Mathison Turing <br>
+            i (Paddington, Londres, 1912 - Wilmslow, Cheshire, 1954)
+            | <br>Considerado uno de los padres de la ciencia de la computación y precursor de la informática moderna.
+      | en 1936.
+    // Biografia Turing
+  //- Descripción informal
+  div
+    h3 Descripción informal
+    p Una MT es un dispositivo hipotético capaz de manipular símbolos en una tira de cinta considerando ciertas reglas.
+    | A pesar de su simplicidad, pueden simular la lógica de cualquier algoritmo de un computador.
+    p Está formado por:
+    .table-afd
+      +table-striped([],[
+        ['Una <em>cinta</em> dividida en celdas.'],
+        ['Un <em>cabezal</em> de lectura/escritura de símbolos y capaz de moverse a la derecha o izquierda una sola celda cada vez sobre dicha cinta.'],
+        ['Un <em>registro de estado</em> que almacena el estado del MT.']
+      ])
+  //- Descripción formal
+  .first.esquema
+    h3 Descripción formal
+    p Una Máquina de Turing (MT) es una 7-tupla formado por
+    h3 (MT =
+      +tooltip-top(' Γ, ', 'Alfabeto de símbolos de la cinta')
+      +tooltip-top('Σ, ', 'Alfabeto de entrada')
+      +tooltip-top('b, ', 'Símbolo especial para el espacio en blanco (b ⊄ Σ) y no está contenido en el alfabeto de entrada.')
+      +tooltip-top('Q, ', 'Conjunto finito de estados')
+      +tooltip-top(q0+' ' , 'Estado inicial')
+      +tooltip-top('F, ' , 'Conjunto de estados finales o de aceptación')
+      +tooltip-top('ƒ' , 'Función Q × G → Q × G × {I, D, P} (donde I: Izqda, D: Drcha y P: Parada)')
+      | )
+
+  //- Caracteristicas
+  div
+    h3 Características
+    .table-afd
+      +table-striped([], [
+        ['La cinta se supone infinita por ambos lados.'],
+        ['Inicialmente la cinta contiene un número finito de símbolos consecutivos (de Σ) precedidos y seguidos por el símbolo <em>b</em>.'],
+        ['La cabecera de lectura/escritura está situada inicialmente sobre el elemento más a la izquierda de la palabra de entrada.'],
+        ['Toda MT se representa por una tabla de transición (como el resto de autómatas).' +
+         'Si la transición no es posible, la MT <b>se detiene</b>.']
+      ])
+  //- Funcionamiento
+  div
+    h3 Funcionamiento
+    p En cada movimiento:
+    p.pColor.
+      La máquina lee el símbolo de la cinta sobre el que se encuentra el cabezal de lectura/escritura.
+    .pColor
+      p En función del símbolo leído x y del estado actual qi y dependiendo de la función de transición, <em>la máquina realiza tres acciones u operaciones:</em>
+      p.pWhite <b>TRANSITA</b> un nuevo estado qj.
+      p.pWhite <b>ESCRIBE</b> un símbolo en la cinta en la misma posición donde acaba de leer el símbolo actual y.
+      p.pWhite <b>MUEVE EL CABEZAL</b> de lectura y escritura a una posición a la izquierda <i>(L)</i> o a la derecha <i>(R)</i>.
+  //- Descripciones instantáneas
+  div.representacion
+    h3 Descripciones instantáneas
+    p En el caso de las MT, una descripción instantánea es una expresión de la forma
+    p.text-center
+      big "!{x1}q!{x2}", o "!{a1}!{a2}...!{ak_1}q!{ak}!{ak1}...!{an}"
+    p con el siguiente significado:
+    +list-group-custom
+      +component-item La MT se encuentra en el estado q.
+      +component-item La cabeza de lectura/escritura se encuentra encima del símbolo !{ak}.
+      +component-item La parte de la cinta a izquierda y derecha de los símbolos a1 y an se asume formada por blancos.
+      +component-item Los blancos se escriben en la descripción sólo en caso de que sean necesarios.
+  //- Movimientos
+  div
+    h3 Movimientos
+    p Al igual que en los AP, un movimiento (o paso de computación) representa el cambio de configuración de una MT
+      | se representa mediante la relación ├
+  //- Tipos de MT
+  div
+    h3 Tipos de MT
+    .representacion
+      div
+        h4 MT que actúa como TRANSDUCTOR
+        +list-group-custom
+          +component-item.
+            Modifica el contenido de la cinta realizando cierta función.
+          +component-item
+            em Si la entrada está bien formada:
+            <br>debe terminar en un estado final y dar como resultado final un cálculo a partir de lo introducido en dicha entrada.
+          +component-item
+            em Si la entrada no está bien formada:
+            <br>debe terminar en un estado No final.
+
+      div
+        h4 MT que actúa como RECONOCEDOR
+        +list-group-custom
+          +component-item Es capaz de RECONOCER o ACEPTAR un lenguaje L.
+          +component-item.
+            Una MT reconoce un lenguaje L, si dada una entrada (w) en la cinta, la MT siempre se para,
+            y lo hace en un Estado Final (EF) sí y solo sí w pertenece a L.
+          +component-item
+            | Una MT acepta un lenguaje L, si dada una entrada (w) en la cinta, se para en un estado final sí y solo si:
+            | w pertenece a L.
+            p.pWhite Si w no perteneciera a L, la MT podría no parar.
+  //- Representación
+  div
+    h3 Representación
+    +accordion('accordion')
+      +accordion-item-default('MT Transductor','accordion', false)
+        .col-md-12
+          p Siendo x un número entero positivo que determina el número de a's y b's que habrá en el resultado final.
+          p: big f: N → {a, b}*, con f(x) = a<sup>x</sup>b<sup>x</sup>
+          img(src="images/MT-Example.jpg")
+
+      +accordion-item-default('MT Reconocedor','accordion',false)
+        .col-md-12
+          p MT que reconoce
+          p: big L = { a<sup>n</sup>b<sup>n</sup>, n>=0 }
+          img(src="images/MT-Reconocedor.jpg")
+

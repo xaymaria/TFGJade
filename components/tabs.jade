@@ -15,8 +15,8 @@ mixin tab-list(tabs,active)
 //- Tab pane
 mixin tab(id,active)
 	if(active)
-		.tab-pane.active(id="tab#{id}")
+		.tab-pane.active.fade.in(id="tab#{id}")
 			block
 	else
-		.tab-pane(id="tab#{id}")
+		.tab-pane.fade(id="tab#{id}")
 			block

@@ -1,6 +1,33 @@
 - var i = 0;
 - var asterisco ='<span class="glyphicon glyphicon-asterisk"></span>';
 - var arrowRight ='<span class="glyphicon glyphicon-arrow-right"></span>';
+- var a1 = 'a<sub>1</sub>';
+- var a2 = 'a<sub>2</sub>';
+- var ak = 'a<sub>k</sub>';
+- var ak1 = 'a<sub>k+1</sub>';
+- var ak_1 = 'a<sub>k-1</sub>';
+- var an = 'a<sub>n</sub>';
+- var q0 = 'q<sub>0</sub>';
+- var q1 = 'q<sub>1</sub>';
+- var q2 = 'q<sub>2</sub>';
+- var q3 = 'q<sub>3</sub>';
+- var qi = 'q<sub>i</sub>';
+- var qn = 'q<sub>n</sub>';
+- var x1 = 'x<sub>1</sub>';
+- var x2 = 'x<sub>2</sub>';
+- var A0 = 'A<sub>0</sub>';
+- var A1 = 'A<sub>1</sub>';
+- var A2 = 'A<sub>2</sub>';
+- var Z1 = 'Z<sub>1</sub>';
+- var Zi = 'Z<sub>i</sub>';
+- var Zn = 'Z<sub>n</sub>';
+- var lamda = '&#955;';
+- var space = '&#9679;';
+- var points = '<td colspan="5">...</td>';
+
+mixin space()
+  | !{'  '}
+
 
 mixin component-item
   li.list-group-item
@@ -15,6 +42,7 @@ mixin component(logo, title)
       - i += 1;
       +list-group-custom
         block
+
 
 mixin myCarousel(id,items)
   .carousel.slide.text-center(id=id, data-ride="carousel")
@@ -43,3 +71,47 @@ mixin myCarousel(id,items)
     a.right.carousel-control(href="#"+id, role="button", data-slide="next")
       +icon("chevron-right")
       span.sr-only Next
+
+
+mixin myInput(id,label)
+  label(for="#{id}") #{label}
+  .input-group
+    input.form-control(type="text",id="#{id}",name="#{id}", maxlength="1", size="1")
+    span.input-group-addon.insertSpace(rel="tooltip" title="Insertar espacio")
+      i!= space
+
+mixin selectState(id,label)
+  label(for="#{id}") #{label}
+  select.selectpicker(
+    id=id,
+    name=id,
+    data-live-search="true",
+    title="Selecciona",
+    data-width="100%",
+    data-size="5"
+    )
+    option(data-tokens="0 q0" value="q0") q0
+    block
+
+
+//- Tabs
+mixin my-tab-list(tabs,active)
+  ul.nav.nav-tabs.nav-justified(role="tablist")
+    each item,index in tabs
+      if (index === active)
+        li.active
+          a(href="#tab#{index}", role="tab", data-toggle="tab")= item
+      else
+        li
+          a(href="#tab#{index}", role="tab", data-toggle="tab")= item
+  .tab-content
+    block
+
+//- Tab pane
+mixin my-tab(id,active)
+  if(active)
+    .tab-pane.active(id="tab#{id}")
+      block
+  else
+    .tab-pane(id="tab#{id}")
+      block

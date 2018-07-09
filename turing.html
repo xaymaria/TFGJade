@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Autómatas y máquinas de Turing</title>
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/bootstrap-select.min.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/material-icons.css" rel="stylesheet">
+  </head>
+  <body data-spy="scroll" data-target=".scrollspy" id="myPage">
+    <nav role="navigation" class="navbar navbar-fixed-top navbar-default">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" data-toggle="collapse" data-target="#myNavbar" aria-expanded="false" class="navbar-toggle collapsed"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a href="index.html" class="navbar-brand">URJC</a>
+        </div>
+        <div id="myNavbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="index.html">AUTÓMATAS</a></li>
+                <li><a href="afd.html" data-toggle="tooltip" data-placement="bottom" title="Autómatas Finitos Deterministas">AFD</a></li>
+                <li><a href="afnd.html" data-toggle="tooltip" data-placement="bottom" title="Autómatas Finitos No Deterministas">AFND</a></li>
+                <li><a href="aapilas.html" data-toggle="tooltip" data-placement="bottom" title="Autómatas a pilas">A. A PILAS</a></li>
+                <li><a href="turing.html" data-toggle="tooltip" data-placement="bottom" title="Máquinas de Turing">M. DE TURING</a></li>
+                <li><a href="mtGenerator.html" data-toggle="tooltip" data-placement="bottom" title="Editor de Máquinas de Turing">MT EDITOR</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div id="titulo" class="jumbotron text-center">
+      <h1>Autómatas y máquinas de Turing</h1>
+    </div>
+    <div>
+      <h2>MÁQUINAS DE TURING</h2>
+      <h3>Introducción</h3>
+      <p>La máquina de Turing (MT) fue descrita por<span class="tooltip-effect"><span class="tooltip-item">Alan Turing</span><span class="tooltip-content clearfix"><img src="images/Alan_Turing_Aged_16.jpg"><span class="tooltip-text"><strong>Alan Mathison Turing <br></strong><i>(Paddington, Londres, 1912 - Wilmslow, Cheshire, 1954)</i><br>Considerado uno de los padres de la ciencia de la computación y precursor de la informática moderna.</span></span></span>en 1936.</p>
+      <!-- Biografia Turing-->
+    </div>
+    <div>
+      <h3>Descripción informal</h3>
+      <p>Una MT es un dispositivo hipotético capaz de manipular símbolos en una tira de cinta considerando ciertas reglas.</p>A pesar de su simplicidad, pueden simular la lógica de cualquier algoritmo de un computador.
+      <p>Está formado por:</p>
+      <div class="table-afd">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Una <em>cinta</em> dividida en celdas.
+              </td>
+            </tr>
+            <tr>
+              <td>Un <em>cabezal</em> de lectura/escritura de símbolos y capaz de moverse a la derecha o izquierda una sola celda cada vez sobre dicha cinta.
+              </td>
+            </tr>
+            <tr>
+              <td>Un <em>registro de estado</em> que almacena el estado del MT.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="first esquema">
+      <h3>Descripción formal</h3>
+      <p>Una Máquina de Turing (MT) es una 7-tupla formado por</p>
+      <h3>(MT =<a data-toggle="tooltip" data-placement="top" title="Alfabeto de símbolos de la cinta"> Γ, </a><a data-toggle="tooltip" data-placement="top" title="Alfabeto de entrada">Σ, </a><a data-toggle="tooltip" data-placement="top" title="Símbolo especial para el espacio en blanco (b ⊄ Σ) y no está contenido en el alfabeto de entrada.">b, </a><a data-toggle="tooltip" data-placement="top" title="Conjunto finito de estados">Q, </a><a data-toggle="tooltip" data-placement="top" title="Estado inicial">q<sub>0</sub> </a><a data-toggle="tooltip" data-placement="top" title="Conjunto de estados finales o de aceptación">F, </a><a data-toggle="tooltip" data-placement="top" title="Función Q × G → Q × G × {I, D, P} (donde I: Izqda, D: Drcha y P: Parada)">ƒ</a>)
+      </h3>
+    </div>
+    <div>
+      <h3>Características</h3>
+      <div class="table-afd">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>La cinta se supone infinita por ambos lados.
+              </td>
+            </tr>
+            <tr>
+              <td>Inicialmente la cinta contiene un número finito de símbolos consecutivos (de Σ) precedidos y seguidos por el símbolo <em>b</em>.
+              </td>
+            </tr>
+            <tr>
+              <td>La cabecera de lectura/escritura está situada inicialmente sobre el elemento más a la izquierda de la palabra de entrada.
+              </td>
+            </tr>
+            <tr>
+              <td>Toda MT se representa por una tabla de transición (como el resto de autómatas).Si la transición no es posible, la MT <b>se detiene</b>.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div>
+      <h3>Funcionamiento</h3>
+      <p>En cada movimiento:</p>
+      <p class="pColor">La máquina lee el símbolo de la cinta sobre el que se encuentra el cabezal de lectura/escritura.</p>
+      <div class="pColor">
+        <p>En función del símbolo leído x y del estado actual qi y dependiendo de la función de transición, <em>la máquina realiza tres acciones u operaciones:</em></p>
+        <p class="pWhite"><b>TRANSITA</b> un nuevo estado qj.</p>
+        <p class="pWhite"><b>ESCRIBE</b> un símbolo en la cinta en la misma posición donde acaba de leer el símbolo actual y.</p>
+        <p class="pWhite"><b>MUEVE EL CABEZAL</b> de lectura y escritura a una posición a la izquierda <i>(L)</i> o a la derecha <i>(R)</i>.</p>
+      </div>
+    </div>
+    <div class="representacion">
+      <h3>Descripciones instantáneas</h3>
+      <p>En el caso de las MT, una descripción instantánea es una expresión de la forma</p>
+      <p class="text-center">
+        <big>"x<sub>1</sub>qx<sub>2</sub>", o "a<sub>1</sub>a<sub>2</sub>...a<sub>k-1</sub>qa<sub>k</sub>a<sub>k+1</sub>...a<sub>n</sub>"</big>
+      </p>
+      <p>con el siguiente significado:</p>
+      <ul class="list-group">
+        <li class="list-group-item">La MT se encuentra en el estado q.
+        </li>
+        <li class="list-group-item">La cabeza de lectura/escritura se encuentra encima del símbolo a<sub>k</sub>.
+        </li>
+        <li class="list-group-item">La parte de la cinta a izquierda y derecha de los símbolos a1 y an se asume formada por blancos.
+        </li>
+        <li class="list-group-item">Los blancos se escriben en la descripción sólo en caso de que sean necesarios.
+        </li>
+      </ul>
+    </div>
+    <div>
+      <h3>Movimientos</h3>
+      <p>
+        Al igual que en los AP, un movimiento (o paso de computación) representa el cambio de configuración de una MT
+        se representa mediante la relación ├
+      </p>
+    </div>
+    <div>
+      <h3>Tipos de MT</h3>
+      <div class="representacion">
+        <div>
+          <h4>MT que actúa como TRANSDUCTOR</h4>
+          <ul class="list-group">
+            <li class="list-group-item">Modifica el contenido de la cinta realizando cierta función.
+            </li>
+            <li class="list-group-item"><em>Si la entrada está bien formada:</em><br>debe terminar en un estado final y dar como resultado final un cálculo a partir de lo introducido en dicha entrada.
+            </li>
+            <li class="list-group-item"><em>Si la entrada no está bien formada:</em><br>debe terminar en un estado No final.
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h4>MT que actúa como RECONOCEDOR</h4>
+          <ul class="list-group">
+            <li class="list-group-item">Es capaz de RECONOCER o ACEPTAR un lenguaje L.
+            </li>
+            <li class="list-group-item">
+              Una MT reconoce un lenguaje L, si dada una entrada (w) en la cinta, la MT siempre se para,
+              y lo hace en un Estado Final (EF) sí y solo sí w pertenece a L.
+            </li>
+            <li class="list-group-item">
+              Una MT acepta un lenguaje L, si dada una entrada (w) en la cinta, se para en un estado final sí y solo si:
+              w pertenece a L.
+              <p class="pWhite">Si w no perteneciera a L, la MT podría no parar.</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div>
+      <h3>Representación</h3>
+      <div id="accordionaccordion" role="tablist" aria-multiselectable="true" class="panel-group">
+        <div class="panel panel-default">
+          <div role="tab" id="headingMT Transductor" data-toggle="collapse" data-parent="#accordionaccordion" href="#collapseMTTransductor" aria-expanded="true" aria-controls="collapseOne" class="panel-heading">
+            <h5 class="panel-title"><a>MT Transductor</a></h5>
+          </div>
+          <div id="collapseMTTransductor" role="tabpanel" aria-labelledby="headingMT Transductor" class="panel-collapse collapse">
+            <div class="panel-body">
+              <div class="col-md-12">
+                <p>Siendo x un número entero positivo que determina el número de a's y b's que habrá en el resultado final.</p>
+                <p>
+                  <big>f: N → {a, b}*, con f(x) = a<sup>x</sup>b<sup>x</sup></big>
+                </p><img src="images/MT-Example.jpg">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <div role="tab" id="headingMT Reconocedor" data-toggle="collapse" data-parent="#accordionaccordion" href="#collapseMTReconocedor" aria-expanded="true" aria-controls="collapseOne" class="panel-heading">
+            <h5 class="panel-title"><a>MT Reconocedor</a></h5>
+          </div>
+          <div id="collapseMTReconocedor" role="tabpanel" aria-labelledby="headingMT Reconocedor" class="panel-collapse collapse">
+            <div class="panel-body">
+              <div class="col-md-12">
+                <p>MT que reconoce</p>
+                <p>
+                  <big>L = { a<sup>n</sup>b<sup>n</sup>, n>=0 }</big>
+                </p><img src="images/MT-Reconocedor.jpg">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="text-center"><a href="#myPage" title="To Top"><span aria-hidden="true" class="glyphicon glyphicon-chevron-up"></span></a>
+      <p>Web creada por MJKX. 2018.</p>
+    </footer>
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-select.min.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>
