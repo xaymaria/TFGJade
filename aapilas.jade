@@ -1,0 +1,221 @@
+extends _bootstrap
+
+block content
+  .first
+    h2 AUTÓMATAS A PILAS
+    h3 Jerarquía de lenguajes
+    // Gráficos
+    p.
+      De igual manera que los lenguajes regulares se pueden representar mediante Autómatas Finitos Deterministas, los
+      lenguajes independientes del contexto tienen su correspondencia en los Autómatas a Pila (AP)
+
+  // Caracteristicas
+  div
+    h3 Características
+    p Un autómata a pila es un dispositivo que tiene acceso a:
+    .table-afd
+      +table-striped(
+        [],
+        [
+          ['Una secuencia de símbolos de entrada.'],
+          ['El símbolo superior de una memoria en pila (LIFO).']
+        ]
+      )
+
+    p Un AP se encuentra en cada momento en un estado determinado y el estado siguiente depende de los tres elementos siguientes:
+    .table-afd
+      +table-striped(
+        [],
+        [
+          ['Estado actual'],
+          ['Símbolo de entrada'],
+          ['Símbolo superior de la pila']
+        ]
+      )
+
+  // Definicion formal
+  .esquema
+    h3 Definición formal
+    p Contiene los mismos elementos que los AF y se incluyen dos nuevos para la gestión de la pila.
+    h3 AP = (
+      +tooltip-top('Σ', 'Alfabeto de entrada')
+      | ,
+      +tooltip-top(' Γ', 'Alfabeto de pila')
+      | ,
+      +tooltip-top(' Q', 'Conjunto finito de estados')
+      | ,
+      +tooltip-top(' A<sub>0</sub> ∈ Γ', 'Símbolo inicial de la pila que pertenece a Γ')
+      | ,
+      +tooltip-top(' q<sub>0</sub> ∈ Q', 'Estado inicial del autómata')
+      | ,
+      +tooltip-top(' F ⊆ Q', 'Subconjunto de estados finales')
+      | ,
+      +tooltip-top(' ƒ', 'Función de transición')
+      | )
+
+
+  .funcionamiento
+    h3 Funcionamiento
+    p Un AP puede realizar dos tipos de transiciones:
+    .row.representacion
+      .col-md-6
+        b: em Dependientes de la entrada:
+        p f(f, a, A) = {(!{q1}, !{Z1}), ..., (!{qn}, !{Zn})}
+        +list-group-custom
+          +component-item el autómata se encuentra en el estado q
+          +component-item lee el símbolo a de la cinta de entrada
+          +component-item tiene el símbolo A en la cima de la pila
+
+        p El autómata pasará al estado !{qi} (puesto que es <b>no determinista</b>):
+        +list-group-custom
+          +component-item.
+            eliminará el símbolo A e introducirá la palabra !{Zi} en la pila, quedando !{Zi} en su cima.
+          +component-item: u y avanzará una posición en la cinta de entrada.
+
+      .col-md-6
+        b: em Independientes de la entrada:
+        p f(f, !{lamda}, A) = {(!{q1}, !{Z1}), ..., (!{qn}, !{Zn})}
+        +list-group-custom
+          +component-item el autómata se encuentra en el estado q
+          +component-item tiene el símbolo A en la cima de la pila
+
+        p El autómata pasará al estado !{qi} (puesto que es <b>no determinista</b>):
+        +list-group-custom
+          +component-item.
+            eliminará el símbolo A e introducirá la palabra !{Zi} en la pila, quedando !{Zi} en su cima.
+          +component-item: u y mantendrá la misma posición en la cinta de entrada.
+
+  // Representación
+  div
+    h3 Representación gráfica
+    .representacion
+      +list-group-custom
+        +component-item.
+          Cada estado corresponde a un nodo en el grafo y está etiqueta con su nombre. Si es estado final, se marca por un doble círculo o *.
+        +component-item.
+          Cada transición (q, Z) ∈ f(p, a, A) corresponde a un arco del nodo p al nodo q y tiene la etiqueta (a, A, Z).
+        +component-item.
+          No hay transiciones de forma: (..., λ, ...), (ab..., ..., ...) o (..., AB..., ...)
+    p Ejemplo:
+    p.
+      AP = ({a, b, c}, {S, A, B, b}, {p, q, r}, S, p, f, {r})
+      <br>f(p, a, S) = {(p, SAB), (q, b)}
+      <br>f(p, λ, S) = {(p, SAB)}
+      <br>f(q, b, b) = {(q, λ)}
+      <br>f(q, b, B) = {(q, λ)}
+      <br>f(q, c, A) = {(q, A), (q, λ)}
+      <br>f(q, λ, B) = {(r, λ)}
+    // Dibujo
+    .bgGrey
+      img(src="./images/APilaExample.jpg")
+
+  // Descripción instantánea
+  div
+    h3 Descripción instantánea
+    p Representa el estado del AP en un estado determinado por medio de una <em>terna (x, q, Z)</em> donde:
+    .table-afd
+      +table-striped(
+        [],
+        [
+          ['x∈Σ*, la cadena que queda por leer de la entrada'],
+          ['q∈Q, el estado actual'],
+          ['z∈Γ*, el contenido actual de la pila']
+        ]
+      )
+    // Ejemplos
+    +my-tab-list(["No para", "No leída", "No vacía / No final", "Vacía / No final", "No vacía / Final"], 0)
+      +tab("0", "active")
+        .table-responsive: +table([],[
+            ['','(', 'aab, ',	'p, ',	'S',	          '├',''],
+            ['','(', 'aab, ',	'p, ',	'<u>SAB</u>'  ,	'├',''],
+            ['','(',  'ab, ',	'p, ',	'<u>SAB</u>AB',	'├',''],
+            ['','(',   'b, ',	'p, ',	'<u>SAB</u>ABABAB',	'├',''],
+            [points,''],
+            ['','(',   'b, ',	'p, ',	'S(AB)<sup>n</sup>',	'├',''],
+            [points, '']
+          ],
+          "tablaDescrip"
+        )
+
+      +tab("1")
+        .table-responsive: +table([],[
+          ['', '(', 'aaab, ', 'p, ', 'S', '├', ''],
+          ['', '(', 'aaab, ', 'p, ', '<u>SAB</u>', '├', ''],
+          ['', '(', 'aab,  ', 'p, ', '<u>SAB</u>AB', '├', ''],
+          ['', '(', 'ab,   ', 'p, ', '<u>b</u>ABAB', '├', '']
+        ],
+        "tablaDescrip"
+        )
+
+      +tab("2")
+        .table-responsive: +table([],[
+          ['', '(', 'aabcb, ', 'p, ', 'S', '├', ''],
+          ['', '(', 'aabcb, ', 'p, ', '<u>SAB</u>', '├', ''],
+          ['', '(', 'abcb,  ', 'p, ', '<u>SAB</u>AB', '├', ''],
+          ['', '(', 'bcb,   ', 'p, ', '<u>b</u>ABAB', '├', ''],
+          ['', '(', 'cb,    ', 'q, ', 'ABAB', '├', ''],
+          ['', '(', 'b,     ', 'q, ', 'BAB', '├', ''],
+          ['', '(', 'λ,     ', 'q, ', 'AB', '├', ''],
+        ],
+        "tablaDescrip"
+        )
+
+      +tab("3")
+        .table-responsive: +table([],[
+          ['', '(', 'aabcb, ', 'p, ', 'S', '├', ''],
+          ['', '(', 'abcb,  ', 'p, ', '<u>SAB</u>', '├', ''],
+          ['', '(', 'bcb,   ', 'p, ', '<u>b</u>AB', '├', ''],
+          ['', '(', 'cb,    ', 'q, ', 'AB', '├', ''],
+          ['', '(', 'b,     ', 'q, ', 'B', '├', ''],
+          ['', '(', 'b,     ', 'q, ', 'BAB', '├', '']
+        ],
+        "tablaDescrip"
+        )
+      +tab("4")
+        .table-responsive: +table([],[
+          ['', '(', 'aabc, ', 'p, ', 'S', '├', ''],
+          ['', '(', 'abbb, ', 'p, ', '<u>SAB</u>', '├', ''],
+          ['', '(', 'abc,  ', 'q, ', '<u>SAB</u>AB', '├', ''],
+          ['', '(', 'bc,   ', 'q, ', '<u>b</u>ABAB', '├', ''],
+          ['', '(', 'c,    ', 'q, ', 'ABAB', '├', ''],
+          ['', '(', 'λ,    ', 'q, ', 'BAB', '├', ''],
+          ['', '(', 'λ,    ', 'r, ', 'AB', '├', ''],
+        ],
+        "tablaDescrip"
+        )
+  // Lenguaje aceptado
+  div
+    h3 Lenguaje aceptado por un AP
+    p Un AP puede reconocer palabras del alfabeto de entrada de dos maneras distintas:
+    .representacion
+      div
+        h4 Por estado final:
+        p.pColor.
+          L<sub>F</sub> (AP) = {x |(!{q0}, x, !{A0}) ├* (p, λ, X), con p∈F, X∈Γ*}
+      div
+        h4 Por vaciado de pila:
+        p.pColor.
+          L<sub>V</sub> (AP) = {x | (!{q0}, x, !{A0}) ├* (p, λ, λ) con p∈Q}
+
+      p Cuando la aceptación se realiza por vaciado de pila, el conjunto de estados finales F es irrelevante.
+
+
+  // Equivalencias
+  div
+    h3 Equivalencias en AP
+    p Dos autómatas a pila, APV (por vaciado de pila) y APF (por estado final), son equivalentes si aceptan el mismo
+    | lenguaje, es decir si L(APV) = L(APF).
+  // Determinismo
+  div
+    h3 Autómatas a pila determinista
+    p Decimos que un AP es determinista si se verifica:
+    ol(style="list-style-position: inside;")
+      li.pColor
+        | No debe existir transición posible con lectura de símbolo (a) si puede hacerse sin ella, ni el contrario.
+        p.pWhite
+          | ∀q∈Q, ∀A∈Γ:
+          <br> f(q, λ, A) ≠ ∅ ⇒ ∀a ∈ Σ ∪ {λ}: f(q, a, A)
+      br
+      li.pColor
+        | En la definición de cada componente de la función de transición existan como máximo un único elemento.
+        p.pWhite ∀q∈Q,, ∀a ∈ Σ ∪ {λ}: f(q, a, A)
